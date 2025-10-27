@@ -28,6 +28,7 @@ import TasksPage from "./pages/tasks/TasksPage";
 import NotesPage from "./pages/notes/NotesPage";
 import ImportOrExportPage from "./pages/import_export/ImportOrExportPage";
 import SettingsPage from "./pages/settings/SettingsPage";
+import { ApplicationModal } from "./components/ApplicationModal";
 
 /**
  * Composant racine de l’application.
@@ -266,7 +267,14 @@ const App = () => {
             />
             <Route
               path="list-view"
-              element={<ListView data={applications} />}
+              element={
+                <ListView
+                  applications={applications}
+                  onEdit={handleEditApplication}
+                  onDelete={handleDeleteApplication}
+                  onAdd={handleAddApplication}
+                />
+              }
             />
             <Route
               path="statistics"
@@ -278,6 +286,13 @@ const App = () => {
             <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Routes>
+
+        <ApplicationModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveApplication}
+          application={editingApplication}
+        />
 
         {/* Toast global pour les notifications (succès, erreur, etc.) */}
         <Toaster position="top-right" />

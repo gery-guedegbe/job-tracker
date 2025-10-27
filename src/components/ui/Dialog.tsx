@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 
 interface DialogProps {
@@ -19,7 +20,7 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
     };
   }, [open]);
 
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
         <>
@@ -29,17 +30,22 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => onOpenChange(false)}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm"
           />
 
           {/* Dialog Content */}
-          <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="pointer-events-none fixed inset-0 z-[200] flex items-center justify-center p-4">
             {children}
           </div>
         </>
       )}
     </AnimatePresence>
   );
+
+  // Render in a portal to ensure it's on top of everything
+  return typeof document !== "undefined"
+    ? createPortal(content, document.body)
+    : null;
 }
 
 interface DialogContentProps {

@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { Plus } from "lucide-react";
+import { useState } from "react";
+import type { Application, ApplicationStatus } from "../../types";
 import { Card } from "../../components/ui/Card";
+import { CardContent } from "../../components/ui/CardExtended";
 import { Button } from "../../components/ui/button";
 import { ScrollArea } from "../../components/ui/ScrollArea";
-import { CardContent } from "../../components/ui/CardExtended";
-import { useTranslation, getStatusLabel } from "../../lib/i18n";
 import { ApplicationCard } from "../../components/ApplicationCard";
-import type { Application, ApplicationStatus } from "../../types/index";
+import { getStatusLabel, useTranslation } from "../../lib/i18n";
 
-interface KanbanViewPageProps {
+interface KanbanViewProps {
   applications: Application[];
   onEdit: (application: Application) => void;
   onDelete: (id: string) => void;
@@ -16,13 +16,13 @@ interface KanbanViewPageProps {
   onAdd: () => void;
 }
 
-const KanbanViewPage = ({
+function KanbanViewPage({
   applications,
   onEdit,
   onDelete,
   onStatusChange,
   onAdd,
-}: KanbanViewPageProps) => {
+}: KanbanViewProps) {
   const [dragOverColumn, setDragOverColumn] =
     useState<ApplicationStatus | null>(null);
   const { t } = useTranslation();
@@ -82,7 +82,7 @@ const KanbanViewPage = ({
   }
 
   return (
-    <div className="h-[calc(100vh-120px)] p-4">
+    <div className="h-[calc(100vh-120px)] overflow-hidden p-4">
       <div className="scrollbar-hide flex h-full gap-4 overflow-x-auto pb-4">
         {columns.map((status) => {
           const columnApps = applications.filter(
@@ -120,6 +120,7 @@ const KanbanViewPage = ({
                       onDelete={onDelete}
                     />
                   ))}
+
                   {columnApps.length === 0 && (
                     <div className="text-muted-foreground py-8 text-center text-sm">
                       {t.kanban.emptyColumn}
@@ -141,6 +142,6 @@ const KanbanViewPage = ({
       </Button>
     </div>
   );
-};
+}
 
 export default KanbanViewPage;

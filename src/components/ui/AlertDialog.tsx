@@ -9,9 +9,9 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "./Dialog";
 
 interface AlertDialogContextValue {
@@ -155,9 +155,16 @@ export function AlertDialogAction({
   onClick,
   className = "",
 }: AlertDialogActionProps) {
+  const context = useContext(AlertDialogContext);
+
+  const handleClick = () => {
+    onClick?.();
+    context?.onOpenChange(false);
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={`bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${className}`}
     >
       {children}
@@ -176,9 +183,16 @@ export function AlertDialogCancel({
   onClick,
   className = "",
 }: AlertDialogCancelProps) {
+  const context = useContext(AlertDialogContext);
+
+  const handleClick = () => {
+    onClick?.();
+    context?.onOpenChange(false);
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={`border-input bg-background hover:bg-muted focus:ring-primary inline-flex items-center justify-center rounded-lg border px-4 py-2 text-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${className}`}
     >
       {children}

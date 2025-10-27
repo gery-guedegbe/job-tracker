@@ -4,7 +4,7 @@ import Footer from "../components/footer/Footer";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col justify-between">
+    <div className="flex min-h-screen w-full flex-col">
       <Navbar />
 
       <main>

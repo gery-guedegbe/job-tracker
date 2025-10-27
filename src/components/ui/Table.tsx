@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
 import type { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from "react";
+import { forwardRef } from "react";
 
 interface TableProps extends HTMLAttributes<HTMLTableElement> {}
 
