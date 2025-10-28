@@ -232,11 +232,18 @@ export const fr = {
     dangerZone: {
       title: "Zone dangereuse",
       description: "Actions irréversibles sur vos données",
+      clearData: {
+        button: "Supprimer toutes les données",
+        title: "Supprimer toutes les données ?",
+        description:
+          "Cette action supprimera toutes vos candidatures, tâches et notes, mais conservera vos paramètres (thème, langue). Pensez à exporter vos données avant de continuer.",
+        confirm: "Oui, supprimer les données",
+      },
       reset: {
         button: "Réinitialiser l'application",
-        title: "Êtes-vous absolument sûr ?",
+        title: "Réinitialiser l'application complètement ?",
         description:
-          "Cette action est irréversible. Toutes vos candidatures, tâches et notes seront définitivement supprimées. Pensez à exporter vos données avant de continuer.",
+          "Cette action est irréversible. Toutes vos candidatures, tâches, notes ET paramètres seront définitivement supprimés. Pensez à exporter vos données avant de continuer.",
         confirm: "Oui, réinitialiser tout",
       },
     },
@@ -380,6 +387,7 @@ export const fr = {
       dataImported: "Données importées avec succès !",
       dataExported: "Données exportées avec succès !",
       sampleDataLoaded: "Données d'exemple chargées avec succès !",
+      dataCleared: "Toutes les données ont été supprimées !",
       appReset: "Application réinitialisée avec succès !",
     },
     error: {
@@ -395,6 +403,7 @@ export const fr = {
       saveSettings: "Erreur lors de l'enregistrement des paramètres",
       importData: "Erreur lors de l'import des données",
       exportData: "Erreur lors de l'export des données",
+      clearData: "Erreur lors de la suppression des données",
       resetApp: "Erreur lors de la réinitialisation",
     },
   },

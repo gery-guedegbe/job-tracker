@@ -26,7 +26,7 @@ import ListView from "./pages/list-view/ListView";
 import StatisticsPage from "./pages/statistics/StatisticsPage";
 import TasksPage from "./pages/tasks/TasksPage";
 import NotesPage from "./pages/notes/NotesPage";
-import ImportOrExportPage from "./pages/import_export/ImportOrExportPage";
+import ImportExportPage from "./pages/import_export/ImportExportPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import { ApplicationModal } from "./components/ApplicationModal";
 
@@ -103,6 +103,17 @@ const App = () => {
       setApplications(loadedApps);
     } catch (error) {
       console.error("Error loading applications:", error);
+    }
+  };
+
+  const handleSettingsChange = (newSettings: AppSettings) => {
+    setSettings(newSettings);
+
+    // Apply theme immediately
+    if (newSettings.theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   };
 
@@ -278,12 +289,26 @@ const App = () => {
             />
             <Route
               path="statistics"
-              element={<StatisticsPage data={applications} />}
+              element={<StatisticsPage applications={applications} />}
             />
-            <Route path="task" element={<TasksPage data={applications} />} />
-            <Route path="notes" element={<NotesPage data={applications} />} />
-            <Route path="import-or-export" element={<ImportOrExportPage />} />
-            <Route path="settings" element={<SettingsPage />} />
+            <Route
+              path="task"
+              element={<TasksPage applications={applications} />}
+            />
+            <Route path="notes" element={<NotesPage />} />
+            <Route
+              path="import-or-export"
+              element={<ImportExportPage onDataImported={loadApplications} />}
+            />
+            <Route
+              path="settings"
+              element={
+                <SettingsPage
+                  settings={settings}
+                  onSettingsChange={handleSettingsChange}
+                />
+              }
+            />
           </Route>
         </Routes>
 

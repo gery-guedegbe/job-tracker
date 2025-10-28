@@ -232,11 +232,18 @@ export const en: Translation = {
     dangerZone: {
       title: "Danger Zone",
       description: "Irreversible actions on your data",
+      clearData: {
+        button: "Clear All Data",
+        title: "Clear all data?",
+        description:
+          "This action will delete all your applications, tasks, and notes, but will keep your settings (theme, language). Remember to export your data before continuing.",
+        confirm: "Yes, clear data",
+      },
       reset: {
         button: "Reset Application",
-        title: "Are you absolutely sure?",
+        title: "Reset application completely?",
         description:
-          "This action is irreversible. All your applications, tasks, and notes will be permanently deleted. Remember to export your data before continuing.",
+          "This action is irreversible. All your applications, tasks, notes AND settings will be permanently deleted. Remember to export your data before continuing.",
         confirm: "Yes, reset everything",
       },
     },
@@ -378,6 +385,7 @@ export const en: Translation = {
       dataImported: "Data imported successfully!",
       dataExported: "Data exported successfully!",
       sampleDataLoaded: "Sample data loaded successfully!",
+      dataCleared: "All data has been cleared!",
       appReset: "Application reset successfully!",
     },
     error: {
@@ -393,6 +401,7 @@ export const en: Translation = {
       saveSettings: "Error saving settings",
       importData: "Error importing data",
       exportData: "Error exporting data",
+      clearData: "Error clearing data",
       resetApp: "Error resetting application",
     },
   },

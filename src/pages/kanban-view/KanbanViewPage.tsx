@@ -58,7 +58,7 @@ function KanbanViewPage({
 
   if (applications.length === 0) {
     return (
-      <div className="flex h-[calc(100vh-120px)] items-center justify-center p-4">
+      <div className="flex h-[calc(100vh-120px)] items-center justify-center p-6">
         <Card className="max-w-md">
           <CardContent className="py-12 text-center">
             <div className="bg-primary/10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">

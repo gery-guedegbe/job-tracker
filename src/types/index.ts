@@ -28,6 +28,13 @@ export interface Task {
   createdAt: string;
 }
 
+export interface TaskFormData {
+  title: string;
+  description: string;
+  dueDate: string;
+  applicationId: string;
+}
+
 export interface Note {
   id: string;
   title: string;

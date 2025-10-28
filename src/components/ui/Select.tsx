@@ -134,7 +134,7 @@ export function SelectContent({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.15 }}
-          className={`bg-card absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg ${className}`}
+          className={`bg-card absolute z-[250] mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg ${className}`}
         >
           <div className="p-1">{children}</div>
         </motion.div>
