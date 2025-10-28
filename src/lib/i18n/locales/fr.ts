@@ -404,6 +404,8 @@ export const fr = {
       importData: "Erreur lors de l'import des données",
       exportData: "Erreur lors de l'export des données",
       clearData: "Erreur lors de la suppression des données",
+      invalidImportFormat:
+        "Format de fichier invalide. Veuillez importer un fichier JSON valide.",
       resetApp: "Erreur lors de la réinitialisation",
     },
   },

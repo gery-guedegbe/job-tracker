@@ -402,6 +402,8 @@ export const en: Translation = {
       importData: "Error importing data",
       exportData: "Error exporting data",
       clearData: "Error clearing data",
+      invalidImportFormat:
+        "Invalid file format. Please import a valid JSON file.",
       resetApp: "Error resetting application",
     },
   },

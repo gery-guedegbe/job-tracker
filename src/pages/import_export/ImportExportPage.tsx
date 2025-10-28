@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Download, Upload, FileJson, FileSpreadsheet } from "lucide-react";
 import { useTranslation } from "../../lib/i18n";
 import { db } from "../../lib/db";
@@ -19,6 +19,7 @@ interface ImportExportPageProps {
 function ImportExportPage({ onDataImported }: ImportExportPageProps) {
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
   const handleExportJSON = async () => {
@@ -96,17 +97,46 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
     try {
       setIsImporting(true);
       const text = await file.text();
-      const data = JSON.parse(text);
 
+      // Parse JSON with validation
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        toast.error(t.toast.error.invalidImportFormat);
+        return;
+      }
+
+      // Validate data structure
+      if (!data || typeof data !== "object") {
+        toast.error(t.toast.error.invalidImportFormat);
+        return;
+      }
+
+      // Check if data has at least one valid array
+      const hasValidData =
+        (data.applications && Array.isArray(data.applications)) ||
+        (data.tasks && Array.isArray(data.tasks)) ||
+        (data.notes && Array.isArray(data.notes));
+
+      if (!hasValidData) {
+        toast.error(t.toast.error.invalidImportFormat);
+        return;
+      }
+
+      // Import the data
       await db.importData(data);
+
+      // Refresh the application data
       onDataImported();
+
       toast.success(t.toast.success.dataImported);
     } catch (error) {
+      console.error("Import error:", error);
       toast.error(t.toast.error.importData);
-      console.error(error);
     } finally {
       setIsImporting(false);
-      // Reset input
+      // Reset input to allow re-importing the same file
       event.target.value = "";
     }
   };
@@ -126,12 +156,10 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
               <Download className="h-5 w-5" />
               {t.importExport.export.title}
             </CardTitle>
-
             <CardDescription>
               {t.importExport.export.description}
             </CardDescription>
           </CardHeader>
-
           <CardContent className="space-y-3">
             <Button
               onClick={handleExportJSON}
@@ -142,7 +170,6 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
               <FileJson className="h-4 w-4" />
               {t.importExport.export.json.button}
             </Button>
-
             <Button
               onClick={handleExportCSV}
               disabled={isExporting}
@@ -152,7 +179,6 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
               <FileSpreadsheet className="h-4 w-4" />
               {t.importExport.export.csv.button}
             </Button>
-
             <p className="text-muted-foreground mt-4 text-xs">
               {t.importExport.export.info}
             </p>
@@ -166,34 +192,27 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
               <Upload className="h-5 w-5" />
               {t.importExport.import.title}
             </CardTitle>
-
             <CardDescription>
               {t.importExport.import.description}
             </CardDescription>
           </CardHeader>
-
           <CardContent className="space-y-3">
-            <label htmlFor="import-file">
-              <Button
-                disabled={isImporting}
-                className="w-full gap-2"
-                variant="outline"
-              >
-                <span>
-                  <Upload className="h-4 w-4" />
-                  {t.importExport.import.button}
-                </span>
-              </Button>
-
-              <input
-                id="import-file"
-                type="file"
-                accept=".json"
-                onChange={handleImportJSON}
-                className="hidden"
-              />
-            </label>
-
+            <Button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isImporting}
+              className="w-full gap-2"
+              variant="outline"
+            >
+              <Upload className="h-4 w-4" />
+              {isImporting ? t.common.loading : t.importExport.import.button}
+            </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={handleImportJSON}
+              className="hidden"
+            />
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/20">
               <p className="text-xs text-amber-800 dark:text-amber-200">
                 {t.importExport.import.warning}
@@ -208,15 +227,12 @@ function ImportExportPage({ onDataImported }: ImportExportPageProps) {
         <CardHeader>
           <CardTitle>{t.importExport.storage.title}</CardTitle>
         </CardHeader>
-
         <CardContent className="space-y-3">
           <p className="text-muted-foreground text-sm">
             {t.importExport.storage.description}
           </p>
-
           <div className="space-y-2 text-sm">
             <p className="font-medium">{t.importExport.storage.tips}</p>
-
             <ul className="text-muted-foreground list-inside list-disc space-y-1">
               <li>{t.importExport.storage.tip1}</li>
               <li>{t.importExport.storage.tip2}</li>
