@@ -8,7 +8,7 @@ import {
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/Input";
 import { Label } from "../../../components/ui/Label";
-import { Textarea } from "../../../components/ui/TextArea";
+import { Textarea } from "../../../components/ui/Textarea";
 import { Badge } from "../../../components/ui/Badge";
 import { X, StickyNote, FileText, TagIcon } from "lucide-react";
 
@@ -46,14 +46,13 @@ export function NoteModal({
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="flex max-h-[90vh] max-w-2xl flex-col overflow-hidden sm:max-h-[85vh]">
-        {/* --- HEADER --- */}
+        {/* Header - Fixed */}
         <DialogHeader className="flex-shrink-0 border-b pb-3 sm:pb-4">
           <div className="flex items-start justify-between px-4 sm:px-6">
             <div className="flex-1 pr-2">
               <DialogTitle className="text-lg sm:text-xl">
                 {editingNote ? t.noteModal.edit.title : t.noteModal.add.title}
               </DialogTitle>
-
               <DialogDescription className="mt-1 text-xs sm:mt-1.5 sm:text-sm">
                 {editingNote
                   ? t.noteModal.edit.description
@@ -61,7 +60,6 @@ export function NoteModal({
               </DialogDescription>
             </div>
 
-            {/* Bouton de fermeture */}
             <button
               onClick={() => onOpenChange(false)}
               className="hover:bg-muted ml-2 flex-shrink-0 rounded-lg p-1.5 transition-colors sm:ml-4 sm:p-2"
@@ -72,18 +70,19 @@ export function NoteModal({
           </div>
         </DialogHeader>
 
-        {/* --- FORMULAIRE --- */}
+        {/* Form Content - Scrollable */}
         <form
           onSubmit={onSave}
           className="flex flex-1 flex-col overflow-hidden"
         >
           <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
-            {/* Champ Titre */}
+            {/* Title */}
             <div className="space-y-2">
               <Label htmlFor="title" className="flex items-center gap-2">
                 <StickyNote className="text-primary h-4 w-4" />
                 {t.noteModal.fields.title.label}
               </Label>
+
               <Input
                 id="title"
                 value={formData.title}
@@ -95,7 +94,7 @@ export function NoteModal({
               />
             </div>
 
-            {/* Champ Contenu */}
+            {/* Content */}
             <div className="space-y-2">
               <Label htmlFor="content" className="flex items-center gap-2">
                 <FileText className="text-primary h-4 w-4" />
@@ -116,7 +115,7 @@ export function NoteModal({
               />
             </div>
 
-            {/* Champ Tags */}
+            {/* Tags */}
             <div className="space-y-3">
               <Label htmlFor="tags" className="flex items-center gap-2">
                 <TagIcon className="text-primary h-4 w-4" />
@@ -137,6 +136,7 @@ export function NoteModal({
                   placeholder={t.noteModal.fields.tags.placeholder}
                   className="h-11 flex-1"
                 />
+
                 <Button
                   onClick={onAddTag}
                   variant="secondary"
@@ -171,7 +171,7 @@ export function NoteModal({
             </div>
           </div>
 
-          {/* --- FOOTER --- */}
+          {/* Footer - Fixed */}
           <div className="bg-muted/20 flex flex-shrink-0 flex-col-reverse justify-end gap-3 border-t px-4 py-4 sm:flex-row sm:px-6">
             <Button
               variant="outline"
