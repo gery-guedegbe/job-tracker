@@ -23,7 +23,7 @@ import {
 import { Label } from "./ui/Label";
 import { Input } from "./ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/Select";
-import { Textarea } from "./ui/TextArea";
+import { Textarea } from "./ui/Textarea";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/Badge";
 
@@ -88,12 +88,16 @@ export function ApplicationModal({
     onClose();
   };
 
-  const addTag = () => {
+  const addTag = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
     if (tagInput.trim() && !formData.tags?.includes(tagInput.trim())) {
-      setFormData({
-        ...formData,
-        tags: [...(formData.tags || []), tagInput.trim()],
-      });
+      setFormData((prev) => ({
+        ...prev,
+        tags: [...(prev.tags || []), tagInput.trim()],
+      }));
       setTagInput("");
     }
   };
@@ -292,7 +296,7 @@ export function ApplicationModal({
                 />
 
                 <Button
-                  onClick={addTag}
+                  onClick={(e) => addTag(e)}
                   variant="secondary"
                   className="h-11 flex-shrink-0 px-6"
                 >
@@ -309,6 +313,7 @@ export function ApplicationModal({
                       className="gap-1.5 py-1.5 pr-2 pl-3"
                     >
                       <span>{tag}</span>
+
                       <button
                         type="button"
                         onClick={() => removeTag(tag)}

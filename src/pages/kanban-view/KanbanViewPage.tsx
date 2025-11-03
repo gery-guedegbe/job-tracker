@@ -135,10 +135,10 @@ function KanbanViewPage({
 
       <Button
         onClick={onAdd}
-        size="lg"
-        className="fixed right-8 bottom-8 h-14 w-14 rounded-full shadow-lg transition-shadow hover:shadow-xl"
+        className="fixed right-6 bottom-6 z-50 h-14 w-14 rounded-full !p-0 shadow-2xl backdrop-blur-sm transition-all hover:scale-110 hover:shadow-[0_20px_50px_rgba(37,99,235,0.3)] sm:right-8 sm:bottom-8 sm:h-16 sm:w-16"
+        aria-label={t.kanban.addApplication}
       >
-        <Plus className="h-6 w-6" />
+        <Plus className="h-6 w-6 sm:h-7 sm:w-7" />
       </Button>
     </div>
   );

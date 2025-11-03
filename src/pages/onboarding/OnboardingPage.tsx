@@ -137,7 +137,7 @@ function OnboardingPage({ onComplete }: OnboardingProps) {
         {/* === Carte principale contenant le contenu dynamique === */}
         <motion.div
           layout
-          className="bg-card/80 flex min-h-[550px] flex-col rounded-3xl border p-8 shadow-2xl backdrop-blur-xl md:p-12"
+          className="bg-card/80 flex min-h-[550px] flex-col rounded-3xl border p-6 shadow-2xl backdrop-blur-xl md:p-12"
         >
           {/* Transition fluide entre les slides */}
           <AnimatePresence mode="wait">
@@ -240,7 +240,7 @@ function OnboardingPage({ onComplete }: OnboardingProps) {
                   whileTap={{ scale: 0.9 }}
                   className={`h-2 rounded-full transition-all ${
                     index === currentSlide
-                      ? "bg-primary w-8"
+                      ? "bg-primary w-4 lg:w-8"
                       : "bg-muted hover:bg-muted-foreground/30 w-2"
                   }`}
                 />
