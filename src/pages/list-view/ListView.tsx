@@ -66,7 +66,7 @@ export function ListView({
   });
 
   return (
-    <div className="container mx-auto h-[calc(100vh-190px)] space-y-6 overflow-hidden p-8">
+    <div className="container mx-auto space-y-6 overflow-hidden p-4 lg:p-8">
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
         <div className="relative w-full flex-1 md:max-w-md">
           <Search className="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform" />
@@ -79,7 +79,7 @@ export function ListView({
           />
         </div>
 
-        <div className="flex w-full gap-2 md:w-auto">
+        <div className="flex w-full justify-between gap-2 md:w-auto">
           <Select
             value={statusFilter}
             onValueChange={(value) =>
@@ -158,6 +158,7 @@ export function ListView({
                           {tag}
                         </Badge>
                       ))}
+
                       {app.tags.length > 2 && (
                         <Badge variant="outline" className="text-xs">
                           +{app.tags.length - 2}

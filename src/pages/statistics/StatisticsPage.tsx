@@ -87,7 +87,7 @@ export function StatisticsPage({ applications }: StatisticsPageProps) {
 
   /** --- Rendu --- */
   return (
-    <div className="container mx-auto space-y-6 p-8">
+    <div className="container mx-auto space-y-6 overflow-hidden p-4 lg:p-8">
       <div>
         <h2 className="mb-2 text-2xl font-semibold">{t.dashboard.title}</h2>
         <p className="text-muted-foreground">{t.dashboard.subtitle}</p>

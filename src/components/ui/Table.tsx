@@ -85,7 +85,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <td
         ref={ref}
-        className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${className}`}
+        className={`p-2 align-middle lg:p-4 [&:has([role=checkbox])]:pr-0 ${className}`}
         {...props}
       />
     );
