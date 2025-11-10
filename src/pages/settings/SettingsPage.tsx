@@ -96,7 +96,7 @@ export function SettingsPage({
   };
 
   return (
-    <div className="container mx-auto max-w-4xl space-y-6 p-6">
+    <div className="container mx-auto max-w-4xl space-y-6 p-4 lg:p-6">
       <SettingsHeader t={t} />
 
       <div className="space-y-6">

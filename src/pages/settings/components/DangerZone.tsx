@@ -47,12 +47,13 @@ export const DangerZone = ({
     </CardHeader>
 
     <CardContent className="space-y-4">
-      {/* 🧹 Effacer les données uniquement */}
-      <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
+      {/* Effacer les données uniquement */}
+      <div className="flex flex-col items-end justify-between gap-4 rounded-lg border p-4 md:flex-row md:items-start">
         <div className="flex-1 space-y-1">
           <p className="font-medium">
             {t.settings.dangerZone.clearData.button}
           </p>
+
           <p className="text-muted-foreground text-sm">
             Supprime toutes vos candidatures, tâches et notes, mais conserve vos
             paramètres.
@@ -61,16 +62,17 @@ export const DangerZone = ({
 
         <Button
           variant="outline"
-          className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground shrink-0 gap-2"
+          className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground shrink-0 gap-2 text-sm lg:text-base"
           onClick={onClearData}
         >
           <Trash2 className="h-4 w-4" />
+
           {t.common.delete}
         </Button>
       </div>
 
       {/* Réinitialisation complète */}
-      <div className="border-destructive bg-destructive/5 flex items-start justify-between gap-4 rounded-lg border p-4">
+      <div className="border-destructive bg-destructive/5 flex flex-col items-end justify-between gap-4 rounded-lg border p-4 md:flex-row md:items-start">
         <div className="flex-1 space-y-1">
           <p className="text-destructive font-medium">
             {t.settings.dangerZone.reset.button}
@@ -84,10 +86,11 @@ export const DangerZone = ({
 
         <Button
           variant="destructive"
-          className="shrink-0 gap-2"
+          className="shrink-0 gap-2 text-sm lg:text-base"
           onClick={onResetApp}
         >
           <Trash2 className="h-4 w-4" />
+
           {t.common.reset}
         </Button>
       </div>
