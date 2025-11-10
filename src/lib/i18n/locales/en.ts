@@ -198,6 +198,15 @@ export const en: Translation = {
       notes: "Notes",
       tags: "Tags",
     },
+    errors: {
+      noDataToExport: "No data to export",
+      invalidFile: "Invalid file",
+      noValidData: "No valid data found in the file",
+      invalidFileType: "Only JSON files are accepted",
+      fileTooLarge: "File is too large (max 10MB)",
+      invalidJson: "Invalid JSON format",
+      storageQuotaExceeded: "Insufficient storage space",
+    },
   },
 
   settings: {

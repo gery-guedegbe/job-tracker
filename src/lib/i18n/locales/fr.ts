@@ -198,6 +198,15 @@ export const fr = {
       notes: "Notes",
       tags: "Tags",
     },
+    errors: {
+      noDataToExport: "Aucune donnée à exporter",
+      invalidFile: "Fichier invalide",
+      noValidData: "Aucune donnée valide trouvée dans le fichier",
+      invalidFileType: "Seuls les fichiers JSON sont acceptés",
+      fileTooLarge: "Le fichier est trop volumineux (max 10MB)",
+      invalidJson: "Format JSON invalide",
+      storageQuotaExceeded: "Espace de stockage insuffisant",
+    },
   },
 
   settings: {
