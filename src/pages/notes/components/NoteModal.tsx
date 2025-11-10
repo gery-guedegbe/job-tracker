@@ -24,7 +24,7 @@ interface NoteModalProps {
   tagInput: string;
   setFormData: (data: any) => void;
   setTagInput: (value: string) => void;
-  onAddTag: () => void;
+  onAddTag: (e: React.FormEvent) => void;
   onRemoveTag: (tag: string) => void;
   onSave: (e: React.FormEvent) => void;
   t: any;
@@ -130,7 +130,7 @@ export function NoteModal({
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
-                      onAddTag();
+                      onAddTag(e);
                     }
                   }}
                   placeholder={t.noteModal.fields.tags.placeholder}

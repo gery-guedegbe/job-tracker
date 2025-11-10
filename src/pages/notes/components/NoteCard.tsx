@@ -13,10 +13,10 @@ export function NoteCard({ note, locale, onEdit, onDelete }: any) {
             {note.title || "Sans titre"}
           </h3>
 
-          <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="flex gap-1 opacity-100 transition-opacity group-hover:opacity-100 lg:opacity-0">
             <Button
               variant="ghost"
-              size="sm"
+              size="lg"
               onClick={(e) => {
                 e.stopPropagation();
                 onEdit(note);
@@ -28,7 +28,7 @@ export function NoteCard({ note, locale, onEdit, onDelete }: any) {
 
             <Button
               variant="ghost"
-              size="sm"
+              size="lg"
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete(note.id);
@@ -56,7 +56,7 @@ export function NoteCard({ note, locale, onEdit, onDelete }: any) {
           </div>
         )}
 
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted-foreground text-xs lg:text-sm">
           {new Date(note.updatedAt).toLocaleDateString(locale, {
             day: "numeric",
             month: "long",
