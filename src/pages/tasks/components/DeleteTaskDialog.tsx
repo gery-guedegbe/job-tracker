@@ -7,36 +7,28 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "../../../components/ui/AlertDialog";
-import { Button } from "../../../components/ui/button";
-import { Trash2 } from "lucide-react";
 import type { Translation } from "../../../lib/i18n";
+
+interface DeleteTaskDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onConfirm: () => void;
+  t: Translation;
+}
 
 /**
  * DeleteTaskDialog
  * Dialogue de confirmation pour supprimer une tâche.
+ * Version simplifiée et contrôlée
  */
 export const DeleteTaskDialog = ({
+  open,
+  onOpenChange,
+  onConfirm,
   t,
-  taskId,
-  onDelete,
-}: {
-  t: Translation;
-  taskId: string;
-  onDelete: () => void;
-}) => (
-  <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <Button
-        variant="ghost"
-        size="sm"
-        className="text-destructive hover:text-destructive h-8 w-8 p-0"
-      >
-        <Trash2 className="h-4 w-4" />
-      </Button>
-    </AlertDialogTrigger>
-
+}: DeleteTaskDialogProps) => (
+  <AlertDialog open={open} onOpenChange={onOpenChange}>
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>{t.taskModal.deleteConfirm.title}</AlertDialogTitle>
@@ -48,7 +40,7 @@ export const DeleteTaskDialog = ({
       <AlertDialogFooter>
         <AlertDialogCancel>{t.common.cancel}</AlertDialogCancel>
         <AlertDialogAction
-          onClick={onDelete}
+          onClick={onConfirm}
           className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
         >
           {t.common.delete}

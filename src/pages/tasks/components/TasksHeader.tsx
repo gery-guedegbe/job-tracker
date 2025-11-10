@@ -13,9 +13,9 @@ export const TasksHeader = ({
   t: Translation;
   onAddTask: () => void;
 }) => (
-  <div className="flex items-center justify-between">
-    <div>
-      <h2 className="mb-2 text-2xl font-semibold">{t.tasks.title}</h2>
+  <div className="flex flex-col justify-between gap-4 md:flex-row">
+    <div className="flex flex-col items-start justify-between">
+      <h2 className="mb-1 text-2xl font-semibold lg:mb-2">{t.tasks.title}</h2>
       <p className="text-muted-foreground">{t.tasks.subtitle}</p>
     </div>
 

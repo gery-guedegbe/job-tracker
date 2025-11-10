@@ -1,9 +1,15 @@
-import { Calendar, CheckCircle, Circle, Link } from "lucide-react";
+import {
+  CalendarIcon,
+  CheckCircle,
+  Circle,
+  LinkIcon,
+  Trash2,
+} from "lucide-react";
 import { Card } from "../../../components/ui/Card";
 import { Badge } from "../../../components/ui/Badge";
 import type { Task } from "../../../types";
 import type { Translation } from "../../../lib/i18n";
-import { DeleteTaskDialog } from "./DeleteTaskDialog";
+import { Button } from "../../../components/ui/button";
 
 /**
  * TaskItem
@@ -11,7 +17,6 @@ import { DeleteTaskDialog } from "./DeleteTaskDialog";
  */
 export const TaskItem = ({
   task,
-  t,
   locale,
   onToggleComplete,
   onDeleteTask,
@@ -26,27 +31,6 @@ export const TaskItem = ({
 }) => {
   const linkedApp = getLinkedApplication(task.applicationId);
   const isOverdue = new Date(task.dueDate) < new Date() && !task.completed;
-
-  /**
-   * Formate la date de la tâche en gérant les cas invalides
-   */
-  const formatDueDate = (dateString: string, locale: string) => {
-    if (!dateString) return t.tasks.dueDate ?? "—";
-
-    // Normalise le format "YYYY-MM-DD" en ISO complet pour éviter "Invalid Date"
-    const safeDateString = dateString.includes("T")
-      ? dateString
-      : `${dateString}T00:00:00`;
-
-    const date = new Date(safeDateString);
-    if (isNaN(date.getTime())) return "Invalid date";
-
-    return date.toLocaleDateString(locale, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
 
   return (
     <Card className={`p-4 ${task.completed ? "opacity-60" : ""}`}>
@@ -70,11 +54,18 @@ export const TaskItem = ({
               {task.title}
             </h4>
 
-            <DeleteTaskDialog
-              t={t}
-              taskId={task.id}
-              onDelete={() => onDeleteTask(task.id)}
-            />
+            {/* Bouton de suppression qui ouvre le dialog */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteTask(task.id);
+              }}
+              className="text-destructive hover:text-destructive h-8 w-8 p-0"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
           </div>
 
           {task.description && (
@@ -86,13 +77,13 @@ export const TaskItem = ({
               variant={isOverdue ? "destructive" : "outline"}
               className="gap-1"
             >
-              <Calendar className="h-3 w-3" />
-              {formatDueDate(task.dueDate, locale)}
+              <CalendarIcon className="h-3 w-3" />
+              {new Date(task.dueDate).toLocaleDateString(locale)}
             </Badge>
 
             {linkedApp && (
               <Badge variant="secondary" className="gap-1">
-                <Link className="h-3 w-3" />
+                <LinkIcon className="h-3 w-3" />
                 {linkedApp.jobTitle} - {linkedApp.company}
               </Badge>
             )}

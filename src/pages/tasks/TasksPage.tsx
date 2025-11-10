@@ -10,6 +10,7 @@ import { TasksHeader } from "./components/TasksHeader";
 import { TasksEmptyState } from "./components/TasksEmptyState";
 import { TaskSection } from "./components/TaskSection";
 import { TaskModal } from "./components/TaskModal";
+import { DeleteTaskDialog } from "./components/DeleteTaskDialog";
 
 /**
  * TasksPage
@@ -28,6 +29,9 @@ export function TasksPage({ applications }: { applications: Application[] }) {
     applicationId: "",
   });
   const { t, locale } = useTranslation();
+  const [deleteDialogTaskId, setDeleteDialogTaskId] = useState<string | null>(
+    null,
+  );
 
   // Chargement initial des tâches depuis la base locale
   useEffect(() => {
@@ -88,7 +92,16 @@ export function TasksPage({ applications }: { applications: Application[] }) {
    */
   const handleToggleComplete = async (id: string, completed: boolean) => {
     try {
-      await db.updateTask({ id, completed: !completed });
+      // Récupérer la tâche complète avant de la mettre à jour
+      const task = tasks.find((t) => t.id === id);
+
+      if (!task) {
+        console.error("Task not found");
+        return;
+      }
+
+      // Mettre à jour avec l'objet complet
+      await db.updateTask({ ...task, completed: !completed });
       await loadTasks();
       toast.success(completed ? t.tasks.markIncomplete : t.tasks.markComplete);
     } catch (error) {
@@ -104,6 +117,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
     try {
       await db.deleteTask(id);
       await loadTasks();
+      setDeleteDialogTaskId(null);
       toast.success(t.toast.success.taskDeleted);
     } catch (error) {
       toast.error(t.toast.error.deleteTask);
@@ -148,7 +162,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
     applicationId ? applications.find((app) => app.id === applicationId) : null;
 
   return (
-    <div className="container mx-auto max-w-5xl space-y-6 p-8">
+    <div className="container mx-auto max-w-5xl space-y-6 p-4 lg:p-8">
       {/* En-tête */}
       <TasksHeader t={t} onAddTask={() => setIsModalOpen(true)} />
 
@@ -163,7 +177,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
             t={t}
             locale={locale}
             onToggleComplete={handleToggleComplete}
-            onDeleteTask={handleDeleteTask}
+            onDeleteTask={setDeleteDialogTaskId}
             getLinkedApplication={getLinkedApplication}
           />
 
@@ -173,7 +187,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
             t={t}
             locale={locale}
             onToggleComplete={handleToggleComplete}
-            onDeleteTask={handleDeleteTask}
+            onDeleteTask={setDeleteDialogTaskId}
             getLinkedApplication={getLinkedApplication}
           />
 
@@ -183,7 +197,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
             t={t}
             locale={locale}
             onToggleComplete={handleToggleComplete}
-            onDeleteTask={handleDeleteTask}
+            onDeleteTask={setDeleteDialogTaskId}
             getLinkedApplication={getLinkedApplication}
           />
 
@@ -193,7 +207,7 @@ export function TasksPage({ applications }: { applications: Application[] }) {
             t={t}
             locale={locale}
             onToggleComplete={handleToggleComplete}
-            onDeleteTask={handleDeleteTask}
+            onDeleteTask={setDeleteDialogTaskId}
             getLinkedApplication={getLinkedApplication}
           />
         </div>
@@ -208,6 +222,16 @@ export function TasksPage({ applications }: { applications: Application[] }) {
         setFormData={setFormData}
         onSubmit={handleAddTask}
         applications={applications}
+      />
+
+      {/* Dialog de confirmation de suppression */}
+      <DeleteTaskDialog
+        open={deleteDialogTaskId !== null}
+        onOpenChange={(open) => !open && setDeleteDialogTaskId(null)}
+        onConfirm={() =>
+          deleteDialogTaskId && handleDeleteTask(deleteDialogTaskId)
+        }
+        t={t}
       />
     </div>
   );
