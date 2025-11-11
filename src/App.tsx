@@ -30,6 +30,8 @@ import ImportExportPage from "./pages/import_export/ImportExportPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import { ApplicationModal } from "./components/ApplicationModal";
 
+import { Analytics } from "@vercel/analytics/next";
+
 const App = () => {
   // États globaux
   const [isInitialized, setIsInitialized] = useState(false);
@@ -266,6 +268,9 @@ const App = () => {
         />
 
         <Toaster position="top-right" />
+
+        {/* Vercel web analytics components */}
+        <Analytics />
       </BrowserRouter>
     </I18nProvider>
   );
