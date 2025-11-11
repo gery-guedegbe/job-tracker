@@ -30,7 +30,7 @@ import ImportExportPage from "./pages/import_export/ImportExportPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import { ApplicationModal } from "./components/ApplicationModal";
 
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   // États globaux
