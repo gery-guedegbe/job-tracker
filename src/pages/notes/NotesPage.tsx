@@ -174,7 +174,7 @@ function NotesPage() {
               note={note}
               locale={locale === "fr" ? "fr-FR" : "en-US"}
               onEdit={handleOpenModal}
-              onDelete={(id) => setDeleteDialogNoteId(id)}
+              onDelete={(id: string) => setDeleteDialogNoteId(id)}
             />
           ))}
         </div>

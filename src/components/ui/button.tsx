@@ -8,7 +8,7 @@ interface ButtonProps extends Omit<MotionProps, "children" | "ref"> {
   size?: "default" | "sm" | "lg" | "icon";
   children?: React.ReactNode;
   disabled?: boolean;
-  onClick?: (e) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
