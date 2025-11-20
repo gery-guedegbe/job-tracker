@@ -91,12 +91,12 @@ function Navbar() {
     },
     { id: "tasks", label: t.navbar.tasks, icon: CheckSquare, path: "/task" },
     { id: "notes", label: t.navbar.notes, icon: StickyNote, path: "/notes" },
-    {
-      id: "import-export",
-      label: t.navbar.importExport,
-      icon: FileDown,
-      path: "/import-or-export",
-    },
+    // {
+    //   id: "import-export",
+    //   label: t.navbar.importExport,
+    //   icon: FileDown,
+    //   path: "/import-or-export",
+    // },
     {
       id: "settings",
       label: t.navbar.settings,
