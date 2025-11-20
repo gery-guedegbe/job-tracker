@@ -143,7 +143,7 @@ export function ApplicationModal({
           <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
             {/* Job Title and Company - Grid on desktop, Stack on mobile */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <Label htmlFor="jobTitle" className="flex items-center gap-2">
                   <Briefcase className="text-primary h-4 w-4" />
                   {t.modal.fields.jobTitle.label}
@@ -162,7 +162,7 @@ export function ApplicationModal({
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <Label htmlFor="company" className="flex items-center gap-2">
                   <Building2 className="text-primary h-4 w-4" />
                   {t.modal.fields.company.label}

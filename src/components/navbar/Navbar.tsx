@@ -238,7 +238,7 @@ function Navbar() {
                   key={item.id}
                   variant={currentView === item.id ? "default" : "ghost"}
                   onClick={() => handleNavClick(item.path, item.id)}
-                  className="w-full justify-start"
+                  className="w-full justify-start gap-1.5"
                 >
                   <Icon className="h-4 w-4" />
                   <span>{item.label}</span>
@@ -256,15 +256,15 @@ function Navbar() {
                 className="w-full justify-start"
               >
                 {settings.theme === "light" ? (
-                  <>
+                  <div className="flex items-center gap-2">
                     <Moon className="h-4 w-4" />
                     <span>{t.settings.appearance.theme.dark}</span>
-                  </>
+                  </div>
                 ) : (
-                  <>
+                  <div className="flex items-center gap-2">
                     <Sun className="h-4 w-4" />
                     <span>{t.settings.appearance.theme.light}</span>
-                  </>
+                  </div>
                 )}
               </Button>
 
