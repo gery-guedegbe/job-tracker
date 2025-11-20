@@ -12,7 +12,6 @@ import {
   LayoutDashboard,
   List,
   Kanban,
-  FileDown,
   Settings,
   Moon,
   Sun,
